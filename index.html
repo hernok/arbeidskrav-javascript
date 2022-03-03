@@ -4,9 +4,33 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Handleliste</title>
+    <link rel="stylesheet" href="style.css" />
+    <title></title>
   </head>
-  <body>
+  <body onload="loadPage()">
+    <div id="vare-container">
+      <input
+        class="input-field"
+        type="text"
+        id="vare-input"
+        placeholder="Navn på vare"
+      />
+      <input
+        class="input-field"
+        type="number"
+        id="price-input"
+        placeholder="Pris per vare"
+        onsubmit="priceError()"
+      />
+      <input
+        class="input-field"
+        type="number"
+        id="amount-input"
+        placeholder="Antall varer"
+      />
+      <button class="addbtn" onclick="addVare()">Legg til</button>
+    </div>
+    <ul id="vare-list"></ul>
     <script src="/index.js"></script>
   </body>
 </html>
