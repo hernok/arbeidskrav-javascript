@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title></title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title></title>
   </head>
   <body onload="loadPage()">
-    <div id="vare-container">
-      <input
-        class="input-field"
-        type="text"
-        id="vare-input"
-        placeholder="Navn på vare"
-      />
-      <input
-        class="input-field"
-        type="number"
-        id="price-input"
-        placeholder="Pris per vare"
-        onsubmit="return priceError()"
-      />
-      <input
-        class="input-field"
-        type="number"
-        id="amount-input"
-        placeholder="Antall varer"
-        onsubmit="amountError()"
-      />
-
-      <button class="addbtn" onclick="addVare()">Legg til</button>
+    <div id="input-container">
+      <div class="total-sum-wrapper">
+        <p id="total-sum-all-products">Total sum av alle varer: 0 kr</p>
+        <form>
+          <input
+            type="text"
+            id="input-product-name"
+            placeholder="Navn på vare"
+          />
+          <input
+            type="number"
+            id="input-price"
+            min="1"
+            value=""
+            placeholder="Pris per vare"
+            oninput="this.value = filterInput(this.value)"
+          />
+          <input
+            type="number"
+            id="input-amount"
+            min="1"
+            value=""
+            placeholder="Antall varer"
+            oninput="this.value = filterInput(this.value)"
+          />
+        </form>
+        <button onclick="addProduct()">Legg til</button>
+      </div>
     </div>
-    <ul id="vare-list"></ul>
-    <script src="/index.js"></script>
+    <div id="product-list"></div>
+    <script src="index.js"></script>
   </body>
 </html>

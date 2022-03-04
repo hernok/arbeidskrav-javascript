@@ -1,154 +1,142 @@
-/*function loadPage() {
+let products = [];
+let productContainer = document.getElementById("input-container");
+let inputProductName = document.getElementById("input-product-name");
+let inputPrice = document.getElementById("input-price");
+let inputAmount = document.getElementById("input-amount");
+let productElements = document.getElementById("product-list");
+/*
+function loadPage() {
   alert("Velkommen til din handleliste");
   alert(
-    "For å legge til varer skriver du inn navnet på varen i input-feltet merket med vare"
+    "For å legge til varer skriver du inn navnet på varen i input-feltet merket med Navn på vare"
   );
   alert(
-    "Etter du har skrevet navnet til varen må du velge prisen per vare i feltet under merket pris (kan kun bruke tall)"
+    "Deretter må du velge prisen per vare i feltet under merket pris (kan kun bruke tall som er lik eller høyere enn 1)"
   );
   alert(
-    "Når du har skrevet pris og navn på varen må du skrive antallet du ønsker i feltet under"
+    "Når du har skrevet pris og navn på varen må du skrive antallet du ønsker i feltet under merket Antall varer"
+  );
+  alert(
+    "Du kan endre antall varer etter du har lagt til ved å trykke på + og - knappene i ruten"
+  );
+  alert("For å slette varer kan du trykke på slett knappen nederst i ruten"
+  );
+  alert("Når du nesten er tom for en vare vil boksen bytte farge til oransje"
   );
 }
 */
-
-var vareContainer = document.getElementById("vare-container");
-var vareList = document.getElementById("vare-list");
-
-var vareArray = [];
-
-function addVare() {
-  let vareInput = document.getElementById("vare-input").value;
-  let priceInput = document.getElementById("price-input").value;
-  let amountInput = document.getElementById("amount-input").value;
-
-  vareArray.push({
-    name: vareInput,
-    price: priceInput,
-    amount: amountInput,
+function addProduct() {
+  products.push({
+    name: inputProductName.value,
+    price: inputPrice.value,
+    amount: inputAmount.value,
   });
-
-  console.log(vareArray);
-  forArray();
-}
-
-//Array
-function forArray() {
-  vareList.innerHTML = "";
-  for (let i = 0; i < vareArray.length; i++) {
-    vareList.innerHTML += `<div id="item-wrapper"><li id="vare-item">
-        <h1 id="vare-name">
-            Navn på vare: ${vareArray[i].name}
-        </h1>
-        <h2 id="vare-pris">
-          Pris per vare: kr ${vareArray[i].price},-
-        </h2> 
-        <h3 id="antall">
-          Antall varer: <input type="button" onclick="plusCounter(${i})" value="+" id="plus-btn" /> 
-          <span id="number-place"> ${vareArray[i].amount} </span> 
-          <input type="button" onclick="minusCounter(${i})" value="-" id="minus-btn" />
-        </h3>
-        <h2>
-          Total pris: ${vareArray[i].arrayPrice}
-        </h2>
-        <button id="delete-btn" onclick="deleteVare(${i})">Slett</button>
-        </li></div>
-        `;
-  }
-  //Total pris
-}
-
-//Fjerne varer
-function deleteVare(i) {
-  let confirmDelete = prompt(
-    `Ønsker du å slette "${vareArray[i].name}"?
-    ja / nei.`
+  console.log(
+    "La til vare: " +
+      inputProductName.value +
+      ", " +
+      inputPrice.value +
+      ", " +
+      inputAmount.value
   );
-  if (confirmDelete == "ja") {
-    alert(`${vareArray[i].name} er nå slettet.`);
-    vareArray.splice(i, 1);
-    forArray();
+  updateProductList();
+}
+
+function removeProduct(index) {
+  let confirmDelete = prompt(
+    "Ønsker du å slette " + products[index].name + "?" + " (ja/nei)"
+  );
+  if (confirmDelete.toLowerCase() == "ja") {
+    let productName = products[index].name;
+    products.splice(index, 1);
+    updateProductList();
+    alert(productName + " er nå slettet.");
   } else {
     alert("Sletting kansellert.");
   }
 }
-/////////////////////////////////
 
-Counter;
-let counter = `${vareArray[i].amount}`;
-
-var plusBtn = document.getElementById("plus-btn");
-var minusBtn = document.getElementById("minus-btn");
-var antallVare = document.getElementById("antall");
-
-function plusCounter() {
-  counter++;
-  antallVare.innerHTML = counter;
-}
-function minusCounter() {
-  counter--;
-  antallVare.innerHTML = counter;
-}
-
-if (antallVare.value <= 5) {
-  antallVare.style.color = "orange";
-}
-plusBtn.onclick = plusCounter(antallVare);
-minusBtn.onclick = minusCounter();
-
-////////////////////////////////
-//Feilmelding hvis input = 0
-/*
-function priceError(priceInput) {
-  if (priceInput.value == 0) {
-    alert("Verdi må være høyere enn 0");
-    return false;
-  }
-  return true;
-}
-function amountError()
-
-function amountError() {
-  var empt = document.forms["form1"]["text1"].value;
-  if (empt == "") {
-    alert("Please input a Value");
-    return false;
-  } else {
-    alert("Code has accepted : you can try another");
-    return true;
-  }
-}
-*/
-/////////////////////////////////
-//Ny counter
-/*
-  var minusBtn = document.getElementById("minus-btn"),
-    plusBtn = document.getElementById("plus-btn"),
-    numberPlace = document.getElementById("number-place"),
-    number = amountInput,
-    min = 1,
-    max = 1000;
-  minusBtn.onclick = function () {
-    if (number > min) {
-      number = number - 1;
-      numberPlace.innerText = number;
-    }
-    if (number == min) {
-      numberPlace.style.color = "red";
+function updateProductList() {
+  productElements.innerHTML = "";
+  let productPriceSum = 0;
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].amount > 5) {
+      productAmountText =
+        "<p class='product-amount-text'>" + products[i].amount + "</p>";
     } else {
-      numberPlace.style.color = "white";
+      productAmountText =
+        "<p class='product-amount-text' style='color: orange;'>" +
+        products[i].amount +
+        "</p>";
     }
-  }
-  plusBtn.onclick = function(){
-    if(number<max)
-    {
-      number = number+1;
-      numberPlace.innerText = number;}
-      if(number == max)
-    {
-      numberPlace.style.color="red";
+    productElements.innerHTML +=
+      "<div class='product-wrapper' id='product-" +
+      i +
+      "'>" +
+      "<p>Navn på vare: " +
+      products[i].name +
+      "</p>" +
+      "<p>Pris per vare: kr " +
+      products[i].price +
+      ",-</p>" +
+      "<div style='display: inline-block'>" +
+      "Antall varer:" +
+      productAmountText +
+      "</div>" +
+      "<div class='plus-minus-wrapper'>" +
+      "<input class='plus-button' type='button' value='+' onclick='onPlusClicked(" +
+      i +
+      ")'/>" +
+      "<input class='minus-button' type='button' value='-' onclick='onMinusClicked(" +
+      i +
+      ")'/>" +
+      "</div>" +
+      "<p> Total pris: " +
+      products[i].amount * products[i].price +
+      " kr" +
+      "</p>" +
+      "<button onclick='removeProduct(" +
+      i +
+      ")'>Slett</button>" +
+      "</div>";
+
+    if (products[i].amount < 6) {
+      document.getElementById("product-" + i).style.borderColor = "orange";
+    } else {
+      document.getElementById("product-" + i).style.borderColor = "#272323";
     }
-else{
-  numberPlace.style.color= "white";
+
+    productPriceSum += products[i].amount * products[i].price;
   }
-  }*/
+  document.getElementById("total-sum-all-products").innerHTML =
+    "Total sum av alle varer: " + productPriceSum + " kr";
+}
+
+function onPlusClicked(index) {
+  products[index].amount = parseInt(products[index].amount, 10) + 1;
+  updateProductList();
+}
+
+function onMinusClicked(index) {
+  let productAmount = products[index].amount;
+  let productName = products[index].name;
+  if (productAmount == 6) {
+    alert("Det er snart tomt for " + productName);
+  }
+
+  if (products[index].amount == 1) {
+    alert("Antall varer kan ikke være lavere enn 1");
+    return;
+  }
+
+  products[index].amount = parseInt(productAmount, 10) - 1;
+  updateProductList();
+}
+
+function filterInput(value) {
+  if (value <= 0) {
+    value = 1;
+    alert("Kan kun bruke tall som er høyere enn 1");
+  }
+  return value;
+}
