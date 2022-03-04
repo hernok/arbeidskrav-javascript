@@ -4,7 +4,7 @@ let inputProductName = document.getElementById("input-product-name");
 let inputPrice = document.getElementById("input-price");
 let inputAmount = document.getElementById("input-amount");
 let productElements = document.getElementById("product-list");
-/*
+
 function loadPage() {
   alert("Velkommen til din handleliste");
   alert(
@@ -19,12 +19,10 @@ function loadPage() {
   alert(
     "Du kan endre antall varer etter du har lagt til ved å trykke på + og - knappene i ruten"
   );
-  alert("For å slette varer kan du trykke på slett knappen nederst i ruten"
-  );
-  alert("Når du nesten er tom for en vare vil boksen bytte farge til oransje"
-  );
+  alert("For å slette varer kan du trykke på slett knappen nederst i ruten");
+  alert("Når du nesten er tom for en vare vil boksen bytte farge til oransje");
 }
-*/
+
 function addProduct() {
   products.push({
     name: inputProductName.value,
