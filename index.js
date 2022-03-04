@@ -22,7 +22,11 @@ function addVare() {
   let priceInput = document.getElementById("price-input").value;
   let amountInput = document.getElementById("amount-input").value;
 
-  vareArray.push({ name: vareInput, price: priceInput, amount: amountInput });
+  vareArray.push({
+    name: vareInput,
+    price: priceInput,
+    amount: amountInput,
+  });
 
   console.log(vareArray);
   forArray();
@@ -40,7 +44,9 @@ function forArray() {
           Pris per vare: kr ${vareArray[i].price},-
         </h2> 
         <h3 id="antall">
-          Antall varer: <input type="button" onclick="plusCounter(${i})" value="+" id="plus-btn" /> <span id="number-place"> ${vareArray[i].amount} </span> <input type="button" onclick="minusCounter(${i})" value="-" id="minus-btn" />
+          Antall varer: <input type="button" onclick="plusCounter(${i})" value="+" id="plus-btn" /> 
+          <span id="number-place"> ${vareArray[i].amount} </span> 
+          <input type="button" onclick="minusCounter(${i})" value="-" id="minus-btn" />
         </h3>
         <h2>
           Total pris: ${vareArray[i].arrayPrice}
@@ -50,47 +56,6 @@ function forArray() {
         `;
   }
   //Total pris
-  //Ny counter
-  var minusBtn = document.getElementById("minus-btn"),
-    plusBtn = document.getElementById("plus-btn"),
-    numberPlace = document.getElementById("number-place"),
-    number = amountInput,
-    min = 1,
-    max = 1000;
-  minusBtn.onclick = function () {
-    if (number > min) {
-      number = number - 1;
-      numberPlace.innerText = number;
-    }
-    if (number == min) {
-      numberPlace.style.color = "red";
-    } else {
-      numberPlace.style.color = "white";
-    }
-  };
-
-  /*Counter
-  let counter = `${vareArray[i].amount}`;
-
-  var plusBtn = document.getElementById("plus-btn");
-  var minusBtn = document.getElementById("minus-btn");
-  var antallVare = document.getElementById("antall");
-
-  function plusCounter() {
-    counter++;
-    antallVare.innerHTML = counter;
-  }
-  function minusCounter() {
-    counter--;
-    antallVare.innerHTML = counter;
-  }
-
-  if (antallVare.value <= 5) {
-    antallVare.style.color = "orange";
-  }
-  plusBtn.onclick = plusCounter(antallVare);
-  minusBtn.onclick = minusCounter();
-  */
 }
 
 //Fjerne varer
@@ -107,7 +72,31 @@ function deleteVare(i) {
     alert("Sletting kansellert.");
   }
 }
+/////////////////////////////////
 
+Counter;
+let counter = `${vareArray[i].amount}`;
+
+var plusBtn = document.getElementById("plus-btn");
+var minusBtn = document.getElementById("minus-btn");
+var antallVare = document.getElementById("antall");
+
+function plusCounter() {
+  counter++;
+  antallVare.innerHTML = counter;
+}
+function minusCounter() {
+  counter--;
+  antallVare.innerHTML = counter;
+}
+
+if (antallVare.value <= 5) {
+  antallVare.style.color = "orange";
+}
+plusBtn.onclick = plusCounter(antallVare);
+minusBtn.onclick = minusCounter();
+
+////////////////////////////////
 //Feilmelding hvis input = 0
 /*
 function priceError(priceInput) {
@@ -130,3 +119,36 @@ function amountError() {
   }
 }
 */
+/////////////////////////////////
+//Ny counter
+/*
+  var minusBtn = document.getElementById("minus-btn"),
+    plusBtn = document.getElementById("plus-btn"),
+    numberPlace = document.getElementById("number-place"),
+    number = amountInput,
+    min = 1,
+    max = 1000;
+  minusBtn.onclick = function () {
+    if (number > min) {
+      number = number - 1;
+      numberPlace.innerText = number;
+    }
+    if (number == min) {
+      numberPlace.style.color = "red";
+    } else {
+      numberPlace.style.color = "white";
+    }
+  }
+  plusBtn.onclick = function(){
+    if(number<max)
+    {
+      number = number+1;
+      numberPlace.innerText = number;}
+      if(number == max)
+    {
+      numberPlace.style.color="red";
+    }
+else{
+  numberPlace.style.color= "white";
+  }
+  }*/
