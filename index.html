@@ -20,14 +20,16 @@
         type="number"
         id="price-input"
         placeholder="Pris per vare"
-        onsubmit="priceError()"
+        onsubmit="return priceError()"
       />
       <input
         class="input-field"
         type="number"
         id="amount-input"
         placeholder="Antall varer"
+        onsubmit="amountError()"
       />
+
       <button class="addbtn" onclick="addVare()">Legg til</button>
     </div>
     <ul id="vare-list"></ul>

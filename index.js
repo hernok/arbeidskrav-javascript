@@ -28,10 +28,11 @@ function addVare() {
   forArray();
 }
 
+//Array
 function forArray() {
   vareList.innerHTML = "";
   for (let i = 0; i < vareArray.length; i++) {
-    vareList.innerHTML += `<li id="vare-item">
+    vareList.innerHTML += `<div id="item-wrapper"><li id="vare-item">
         <h1 id="vare-name">
             Navn på vare: ${vareArray[i].name}
         </h1>
@@ -39,15 +40,60 @@ function forArray() {
           Pris per vare: kr ${vareArray[i].price},-
         </h2> 
         <h3 id="antall">
-          Antall varer: ${vareArray[i].amount}
+          Antall varer: <input type="button" onclick="plusCounter(${i})" value="+" id="plus-btn" /> <span id="number-place"> ${vareArray[i].amount} </span> <input type="button" onclick="minusCounter(${i})" value="-" id="minus-btn" />
         </h3>
         <h2>
           Total pris: ${vareArray[i].arrayPrice}
+        </h2>
         <button id="delete-btn" onclick="deleteVare(${i})">Slett</button>
-        </li>
+        </li></div>
         `;
   }
+  //Total pris
+  //Ny counter
+  var minusBtn = document.getElementById("minus-btn"),
+    plusBtn = document.getElementById("plus-btn"),
+    numberPlace = document.getElementById("number-place"),
+    number = amountInput,
+    min = 1,
+    max = 1000;
+  minusBtn.onclick = function () {
+    if (number > min) {
+      number = number - 1;
+      numberPlace.innerText = number;
+    }
+    if (number == min) {
+      numberPlace.style.color = "red";
+    } else {
+      numberPlace.style.color = "white";
+    }
+  };
+
+  /*Counter
+  let counter = `${vareArray[i].amount}`;
+
+  var plusBtn = document.getElementById("plus-btn");
+  var minusBtn = document.getElementById("minus-btn");
+  var antallVare = document.getElementById("antall");
+
+  function plusCounter() {
+    counter++;
+    antallVare.innerHTML = counter;
+  }
+  function minusCounter() {
+    counter--;
+    antallVare.innerHTML = counter;
+  }
+
+  if (antallVare.value <= 5) {
+    antallVare.style.color = "orange";
+  }
+  plusBtn.onclick = plusCounter(antallVare);
+  minusBtn.onclick = minusCounter();
+  */
 }
+
+//Fjerne varer
 function deleteVare(i) {
   let confirmDelete = prompt(
     `Ønsker du å slette "${vareArray[i].name}"?
@@ -62,12 +108,25 @@ function deleteVare(i) {
   }
 }
 
-// Feilmelding hvis input = 0
+//Feilmelding hvis input = 0
+/*
 function priceError(priceInput) {
-  if (priceInput.value == "0") {
+  if (priceInput.value == 0) {
     alert("Verdi må være høyere enn 0");
     return false;
   }
   return true;
 }
-//function amountError()
+function amountError()
+
+function amountError() {
+  var empt = document.forms["form1"]["text1"].value;
+  if (empt == "") {
+    alert("Please input a Value");
+    return false;
+  } else {
+    alert("Code has accepted : you can try another");
+    return true;
+  }
+}
+*/
